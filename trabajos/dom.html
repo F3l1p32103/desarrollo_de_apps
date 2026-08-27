@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio de DOM</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+    .caja { padding: 20px; background-color: #f0f0f0; border-radius: 8px; margin-top: 15px; }
+    .activo { background-color: #28a745; color: white; }
+  </style>
+</head>
+<body>
+
+  <h1 id="titulo">Hola, bienvenido al DOM</h1>
+  <button id="miBoton">Cambiar Estado</button>
+
+  <div id="contenedor" class="caja">
+    <p id="mensaje">Estado actual: Inactivo</p>
+  </div>
+
+  <script>
+    // 1. Seleccionar los elementos del DOM usando sus IDs
+    const titulo = document.getElementById('titulo');
+    const boton = document.getElementById('miBoton');
+    const mensaje = document.getElementById('mensaje');
+    const contenedor = document.getElementById('contenedor');
+
+    // 2. Escuchar el evento 'click' en el botón
+    boton.addEventListener('click', () => {
+      // 3. Manipular el contenido y los estilos del DOM
+      if (contenedor.classList.contains('activo')) {
+        contenedor.classList.remove('activo');
+        titulo.textContent = "Hola, bienvenido al DOM";
+        mensaje.textContent = "Estado actual: Inactivo";
+      } else {
+        contenedor.classList.add('activo');
+        titulo.textContent = "¡Has manipulado el DOM con éxito!";
+        mensaje.textContent = "Estado actual: Activo";
+      }
+    });
+  </script>
+
+</body>
+</html>
