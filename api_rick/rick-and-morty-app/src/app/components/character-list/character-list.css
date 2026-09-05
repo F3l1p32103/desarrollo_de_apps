@@ -95,7 +95,7 @@
   pointer-events: none;
 }
 
-.image-wrapper:hover .hover-overlay {
+.card:hover .hover-overlay {
   opacity: 1;
 }
 
@@ -105,9 +105,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(214, 61, 46, 0.65);
-  color: #ffffff;
-  font-size: 4rem;
-  font-weight: bold;
+  background: rgba(0, 0, 0, 0.35);
   pointer-events: none;
+}
+
+.marked-overlay span {
+  color: #ff1f1f;
+  font-size: 7rem;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0,0,0,0.9);
 }

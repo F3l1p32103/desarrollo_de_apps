@@ -14,14 +14,14 @@
       @for (char of characters; track char.id) {
         <div class="card" (click)="toggleMark(char.id)"> 
             <div class="image-wrapper">
-                <img [src]="char.image" [alt]="char.name" loading="lazy"/>}
+                <img [src]="char.image" [alt]="char.name" loading="lazy"/>
 
                 @if (!isMarked(char.id)) {
                     <div class="hover-overlay">MATAR</div>
                 }
 
                 @if (isMarked(char.id)){
-                    <div class="marked-overlay"></div>
+                    <div class="marked-overlay"><span>✕</span></div>
                 }
             </div>
 
