@@ -1,0 +1,238 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ current?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p>{{ current?.description }}</p>
+
+  <div [ngSwitch]="id">
+
+    <!-- BUTTON -->
+    <div *ngSwitchCase="'button'">
+      <ion-button (click)="presentToast()">Presiona este botón</ion-button>
+      <ion-button color="secondary" fill="outline">Otro estilo</ion-button>
+    </div>
+
+    <!-- BADGE -->
+    <div *ngSwitchCase="'badge'">
+      <ion-badge color="primary">5</ion-badge>
+      <ion-badge color="danger">99+</ion-badge>
+    </div>
+
+    <!-- CARD -->
+    <ion-card *ngSwitchCase="'card'">
+      <ion-card-header>
+        <ion-card-title>Título de la tarjeta</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>Este es el contenido de un ion-card.</ion-card-content>
+    </ion-card>
+
+    <!-- CHECKBOX -->
+    <ion-item *ngSwitchCase="'checkbox'">
+      <ion-checkbox [(ngModel)]="checkboxValue" slot="start"></ion-checkbox>
+      <ion-label>{{ checkboxValue ? 'Marcado' : 'Sin marcar' }}</ion-label>
+    </ion-item>
+
+    <!-- CHIP -->
+    <div *ngSwitchCase="'chip'">
+      <ion-chip color="primary">
+        <ion-label>Chip de ejemplo</ion-label>
+      </ion-chip>
+    </div>
+
+    <!-- DATETIME -->
+    <ion-datetime *ngSwitchCase="'datetime'" presentation="date"></ion-datetime>
+
+    <!-- FAB -->
+    <div *ngSwitchCase="'fab'" style="position: relative; height: 150px;">
+      <ion-fab vertical="center" horizontal="center">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </div>
+
+    <!-- ICON -->
+    <div *ngSwitchCase="'icon'">
+      <ion-icon name="heart" size="large" color="danger"></ion-icon>
+      <ion-icon name="star" size="large" color="warning"></ion-icon>
+    </div>
+
+    <!-- IMG -->
+    <ion-img *ngSwitchCase="'img'" src="https://ionicframework.com/docs/img/demos/card-media.png"></ion-img>
+
+    <!-- INFINITE SCROLL -->
+    <ng-container *ngSwitchCase="'infinite-scroll'">
+      <ion-item *ngFor="let item of infiniteItems">
+        <ion-label>{{ item }}</ion-label>
+      </ion-item>
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ng-container>
+
+    <!-- INPUT -->
+    <div *ngSwitchCase="'input'">
+      <ion-item>
+        <ion-input label="Escribe algo" [(ngModel)]="inputValue" placeholder="Ejemplo"></ion-input>
+      </ion-item>
+      <p>Valor actual: {{ inputValue }}</p>
+    </div>
+
+    <!-- ITEM SLIDING -->
+    <ion-item-sliding *ngSwitchCase="'item-sliding'">
+      <ion-item>
+        <ion-label>Desliza este ítem hacia la izquierda</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger">Borrar</ion-item-option>
+        <ion-item-option color="warning">Archivar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <!-- LOADING -->
+    <ion-button *ngSwitchCase="'loading'" (click)="presentLoading()">Mostrar ion-loading</ion-button>
+
+    <!-- MENU -->
+    <p *ngSwitchCase="'menu'">
+      ion-menu requiere un &lt;ion-menu&gt; junto a tu &lt;ion-router-outlet&gt; en app.component.html,
+      y un &lt;ion-menu-button&gt; en el toolbar de la página donde quieras abrirlo. Es una configuración
+      a nivel de app, no de una sola página.
+    </p>
+
+    <!-- MODAL -->
+    <div *ngSwitchCase="'modal'">
+      <ion-button id="open-modal">Abrir ion-modal</ion-button>
+      <ion-modal trigger="open-modal">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Modal de ejemplo</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">Contenido dentro del modal.</ion-content>
+        </ng-template>
+      </ion-modal>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div *ngSwitchCase="'progress-bar'">
+      <ion-progress-bar [value]="progress"></ion-progress-bar>
+      <ion-range [(ngModel)]="progress" min="0" max="1" step="0.1"></ion-range>
+    </div>
+
+    <!-- RADIO -->
+    <ion-radio-group *ngSwitchCase="'radio'" [(ngModel)]="radioValue">
+      <ion-item>
+        <ion-radio value="opcion1" slot="start"></ion-radio>
+        <ion-label>Opción 1</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-radio value="opcion2" slot="start"></ion-radio>
+        <ion-label>Opción 2</ion-label>
+      </ion-item>
+    </ion-radio-group>
+
+    <!-- RANGE -->
+    <div *ngSwitchCase="'range'">
+      <ion-range [(ngModel)]="rangeValue" min="0" max="100"></ion-range>
+      <p>Valor: {{ rangeValue }}</p>
+    </div>
+
+    <!-- REFRESHER -->
+    <p *ngSwitchCase="'refresher'">
+      ion-refresher debe ser el primer hijo de &lt;ion-content&gt; en la página donde se use, así que
+      no se puede demostrar dentro de esta vista genérica. Agrégalo a cualquiera de tus páginas así:
+      &lt;ion-refresher slot="fixed"&gt;&lt;ion-refresher-content&gt;&lt;/ion-refresher-content&gt;&lt;/ion-refresher&gt;
+    </p>
+
+    <!-- SEARCHBAR -->
+    <div *ngSwitchCase="'searchbar'">
+      <ion-searchbar [(ngModel)]="searchValue" placeholder="Buscar..."></ion-searchbar>
+      <p>Buscando: {{ searchValue }}</p>
+    </div>
+
+    <!-- SEGMENT -->
+    <ion-segment *ngSwitchCase="'segment'" [(ngModel)]="segmentValue">
+      <ion-segment-button value="a">
+        <ion-label>A</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="b">
+        <ion-label>B</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- SELECT -->
+    <ion-item *ngSwitchCase="'select'">
+      <ion-select [(ngModel)]="selectValue" label="Elige una opción">
+        <ion-select-option value="opcion1">Opción 1</ion-select-option>
+        <ion-select-option value="opcion2">Opción 2</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- SKELETON TEXT -->
+    <ion-item *ngSwitchCase="'skeleton-text'">
+      <ion-label>
+        <h3><ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text></h3>
+        <p><ion-skeleton-text [animated]="true" style="width: 90%;"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+
+    <!-- TOGGLE -->
+    <ion-item *ngSwitchCase="'toggle'">
+      <ion-toggle [(ngModel)]="toggleValue"></ion-toggle>
+      <ion-label class="ion-margin-start">{{ toggleValue ? 'Activado' : 'Desactivado' }}</ion-label>
+    </ion-item>
+
+    <!-- TOAST -->
+    <ion-button *ngSwitchCase="'toast'" (click)="presentToast()">Mostrar ion-toast</ion-button>
+
+    <!-- ALERT -->
+    <ion-button *ngSwitchCase="'alert'" (click)="presentAlert()">Mostrar ion-alert</ion-button>
+
+    <!-- ACTION SHEET -->
+    <ion-button *ngSwitchCase="'action-sheet'" (click)="presentActionSheet()">Mostrar ion-action-sheet</ion-button>
+
+    <!-- POPOVER -->
+    <div *ngSwitchCase="'popover'">
+      <ion-button id="open-popover">Mostrar ion-popover</ion-button>
+      <ion-popover trigger="open-popover">
+        <ng-template>
+          <ion-content class="ion-padding">Contenido del popover.</ion-content>
+        </ng-template>
+      </ion-popover>
+    </div>
+
+    <!-- REORDER -->
+    <ion-list *ngSwitchCase="'reorder'">
+      <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($event)">
+        <ion-item *ngFor="let item of reorderItems">
+          <ion-label>{{ item }}</ion-label>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+      </ion-reorder-group>
+    </ion-list>
+
+    <!-- ACCORDION -->
+    <ion-accordion-group *ngSwitchCase="'accordion'">
+      <ion-accordion value="primero">
+        <ion-item slot="header">
+          <ion-label>Sección 1</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">Contenido de la sección 1.</div>
+      </ion-accordion>
+      <ion-accordion value="segundo">
+        <ion-item slot="header">
+          <ion-label>Sección 2</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">Contenido de la sección 2.</div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+  </div>
+</ion-content>
